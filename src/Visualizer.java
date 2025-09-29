@@ -10,6 +10,8 @@ public class Visualizer {
         mainPanel = new MainPanel();
         topPanel = new TopPanel();
         timer = new Timer(delay, _ -> nextFrame());
+        RandNumArray randArray = new RandNumArray(100, 1, 100);
+        randArray.printArray();
     }
     public void run() {
         new MyFrame(mainPanel, topPanel);
