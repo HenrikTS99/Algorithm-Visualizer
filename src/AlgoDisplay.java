@@ -4,25 +4,33 @@ import java.awt.*;
 public class AlgoDisplay extends JPanel {
     int[] arr;
     int arrLength;
-    int pixelSize = 4;
+    int pixelSize;
+    int arrMaxValue;
 
-    AlgoDisplay(int[] arr) {
+    AlgoDisplay(RandNumArray randArrObj, int parentHeight, int parentWidth, int pixelSize) {
         //TODO pick algorithm
-        this.arr = arr;
+        this.arrMaxValue = randArrObj.getMaxValue();
+        this.arr = randArrObj.getArray();
+        this.pixelSize = pixelSize;
         arrLength = arr.length;
+        this.setPreferredSize(new Dimension(
+                (int) ((parentWidth * pixelSize) * 0.9), (int) ((parentHeight * pixelSize) * 0.9)
+        ));
+        this.setBackground(Color.BLACK);
     }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        int width = this.getWidth() / arrLength;
+        int height = this.getHeight() / arrMaxValue;
+        int y = this.getHeight();
+        g.setColor(Color.GREEN);
         for (int i = 0; i < arrLength; i ++) {
             int arrNum = arr[i];
-            for (int pixel = 0; pixel < arrNum; pixel ++) {
-                g.setColor(Color.BLACK);
-                g.fillRect(i * pixelSize, pixel * pixelSize, pixelSize, pixelSize);
-            }
+            int x = width * i;
+            g.fillRect(x, y, width, -(height * arrNum));
         }
 
     }
+
 }

@@ -5,15 +5,16 @@ public class AlgoPanel extends JPanel {
     int height = 100;
     int width = 200;
     int pixelSize = 5;
-    int[] randomizedArray;
     AlgoDisplay algoDisplay;
 
-    public AlgoPanel(int[] randArr) {
+    public AlgoPanel(RandNumArray randArrObj) {
         this.setPreferredSize(new Dimension(
                 width * pixelSize, height * pixelSize
         ));
         this.setBackground(Color.BLUE);
-        this.randomizedArray = randArr;
-        algoDisplay = new AlgoDisplay(randomizedArray);
+        algoDisplay = new AlgoDisplay(randArrObj, height, width, pixelSize);
+        this.add(algoDisplay);
+        this.repaint();
+        algoDisplay.repaint();
     }
 }
