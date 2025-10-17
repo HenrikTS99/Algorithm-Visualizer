@@ -21,15 +21,22 @@ public class AlgoDisplay extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int width = this.getWidth() / arrLength;
-        int height = this.getHeight() / arrMaxValue;
-        int y = this.getHeight();
+
+        int panelWidth = this.getWidth();
+        int panelHeight = this.getHeight();
+        int barWidth = panelWidth / arrLength;
+        double scale = (double) panelHeight / arrMaxValue;
+
         g.setColor(Color.GREEN);
+
         for (int i = 0; i < arrLength; i ++) {
-            int arrNum = arr[i];
-            int x = width * i;
-            g.fillRect(x, y, width, -(height * arrNum));
+            int barHeight = (int) (arr[i] * scale);
+            int x = barWidth * i;
+            int y = panelHeight - barHeight; // top of the bar
+
+            g.fillRect(x, y, barWidth, barHeight);
         }
+        Algorithm.bubbleSortOneStep(arr);
 
     }
 
