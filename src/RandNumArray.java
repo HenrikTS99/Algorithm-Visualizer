@@ -1,36 +1,26 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class RandNumArray {
     int[] arr;
     int maxValue;
-    int maxPossibleValue;
-    int arrLength;
 
-    public RandNumArray(int length, int minValue, int maxPossibleValue) {
-        this.maxPossibleValue = maxPossibleValue;
-        arrLength = length;
-        arr = new int[length];
-
-        Random random = new Random();
-
-        for (int i = 0; i < length; i++) {
-            arr[i] = random.nextInt(minValue, maxPossibleValue + 1);
-        }
-        maxValue = findMaxValue(); // Get max value from array after it is created
+    public RandNumArray(int minValue, int maxValue) {
+        this.maxValue = maxValue;
+        arr = IntStream.rangeClosed(minValue, maxValue).toArray();
+        shuffleArray();
     }
 
-    private int findMaxValue() {
-        int highest = arr[0];
-        for (int i = 1; i < arrLength; i++) {
-            if (arr[i] > highest) {
-                highest = arr[i];
-                if (highest == maxPossibleValue) {
-                    return highest;
-                }
-            }
+    // Fisher-Yates shuffle
+    private void shuffleArray() {
+        Random rnd = new Random();
+        for (int i = arr.length - 1; i > 0; i--) {
+            int j = rnd.nextInt(i + 1);
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
-        return highest;
     }
 
     public void printArray() {
@@ -38,6 +28,5 @@ public class RandNumArray {
     }
 
     public int[] getArray() { return arr; }
-    public int getMaxPossibleValue() { return maxPossibleValue; }
     public int getMaxValue() { return maxValue; }
 }

@@ -12,7 +12,7 @@ public class MainPanel extends JPanel {
     public MainPanel() {
         this.setLayout(new GridLayout(2, 2, 10, 10));
 
-        randArr = new RandNumArray(100, 1, 100);
+        randArr = new RandNumArray(1, 100);
         randArr.printArray();
         addAlgoPanels();
     }
