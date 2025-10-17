@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Visualizer {
     private final MainPanel mainPanel;
     private final TopPanel topPanel;
-    private int delay = 100;
+    private int delay = 10;
     private final Timer timer;
 
     public Visualizer() {
@@ -17,6 +17,9 @@ public class Visualizer {
     }
 
     public void nextFrame() {
+        mainPanel.updateSteps();
         mainPanel.repaint();
+
+
     }
 }

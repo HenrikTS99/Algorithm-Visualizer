@@ -8,7 +8,6 @@ public class AlgoDisplay extends JPanel {
     int arrMaxValue;
 
     AlgoDisplay(RandNumArray randArrObj, int parentHeight, int parentWidth, int pixelSize) {
-        //TODO pick algorithm
         this.arrMaxValue = randArrObj.getMaxValue();
         this.arr = randArrObj.getArray();
         this.pixelSize = pixelSize;
@@ -18,6 +17,12 @@ public class AlgoDisplay extends JPanel {
         ));
         this.setBackground(Color.BLACK);
     }
+
+    public void setArray(int[] arr) {
+        this.arr = arr;
+        repaint();
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -36,8 +41,6 @@ public class AlgoDisplay extends JPanel {
 
             g.fillRect(x, y, barWidth, barHeight);
         }
-        Algorithm.bubbleSortOneStep(arr);
-
     }
 
 }
