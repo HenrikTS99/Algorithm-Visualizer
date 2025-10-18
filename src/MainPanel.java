@@ -1,5 +1,7 @@
 import algorithms.BubbleSort;
 import algorithms.InsertionSort;
+import algorithms.MergeSort;
+import algorithms.SelectionSort;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +22,8 @@ public class MainPanel extends JPanel {
     public void addAlgoPanels() {
         algoPanels[0] = new AlgoPanel(new BubbleSort(), randArr);
         algoPanels[1] = new AlgoPanel(new InsertionSort(), randArr);
-        algoPanels[2] = new AlgoPanel(new InsertionSort(), randArr);
-        algoPanels[3] = new AlgoPanel(new BubbleSort(), randArr);
+        algoPanels[2] = new AlgoPanel(new SelectionSort(), randArr);
+        algoPanels[3] = new AlgoPanel(new MergeSort(), randArr);
         for (AlgoPanel panel : algoPanels) {
             this.add(panel);
         }
