@@ -32,9 +32,12 @@ public class AlgoDisplay extends JPanel {
         int barWidth = panelWidth / arrLength;
         double scale = (double) panelHeight / arrMaxValue;
 
-        g.setColor(Color.GREEN);
-
         for (int i = 0; i < arrLength; i ++) {
+            // Color bars after value
+            int greenVal = (255 / arrLength) * arr[i];
+            int redVal = 255 - greenVal;
+            g.setColor(new Color(redVal, greenVal, 0));
+
             int barHeight = (int) (arr[i] * scale);
             int x = barWidth * i;
             int y = panelHeight - barHeight; // top of the bar
