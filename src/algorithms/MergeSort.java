@@ -2,63 +2,63 @@ package algorithms;
 import java.util.Arrays;
 
 public class MergeSort extends StepAlgorithm {
-    int[] fullArr;
 
     @Override
     public void prepare(int[] input) {
         steps.clear();
         int[] arr = Arrays.copyOf(input, input.length);
-        fullArr = Arrays.copyOf(input, input.length);
-        mergeSort(arr, 0); // pass start index 0 for the full array
+        int[] aux = new int[arr.length]; // auxiliary array / helper array
+        mergeSort(arr, aux, 0, arr.length - 1); // start recursive merge sort
     }
 
-    // recursivley divide array in 2, sort, re-combine
+    // recursively divide array in 2, sorts each half, re-combine
     // run-time complexity = O(n Log n)
     // space complexity = O(n)
-    public void mergeSort(int[] arr, int startIndex) {
-        int length = arr.length;
-        if (length <= 1) {
-            return;
-        }
+    public void mergeSort(int[] arr, int[] aux, int left, int right) {
+        // base case: single element means sorted
+        if (left >= right) return;
 
-        int mid = length / 2;
-        int[] left = Arrays.copyOfRange(arr, 0, mid);
-        int[] right = Arrays.copyOfRange(arr, mid, length);
+        int mid = (left + right) / 2;
 
-        mergeSort(left, startIndex);
-        mergeSort(right, startIndex + mid);
-        merge(left, right, arr, startIndex);
+        mergeSort(arr, aux, left, mid); // recursively sort left half
+        mergeSort(arr, aux, mid + 1, right); // recursively sort right half
+        // merge the two halves together
+        merge(arr, aux, left, mid, right);
     }
 
-    public void merge(int[] left, int[] right, int[] arr, int startIndex) {
+    /**
+     * Merges two sorted halves of arr[left, mid] and arr[mid+1, right] into a single sorted section.
+     * Records each step for visualization
+     */
+    public void merge(int[] arr, int[] aux, int left, int mid, int right) {
+        // copy current section to helper array so can safely compare while writing into arr
+        // Arguments: source, starting index in source, destination array, starting index in destination, number of elements to copy
+        if (right + 1 - left >= 0) System.arraycopy(arr, left, aux, left, right - left + 1);
 
-        int leftSize = left.length;
-        int rightSize = right.length;
-        int i = 0, l = 0, r = 0; // indices
+        // i: pointer for left half
+        // j: pointer for right half
+        // k: position currently writing to in arr
+        int i = left, j = mid + 1, k = left;
 
-        // check the conditions for merging
-        while(l < leftSize && r < rightSize) {
-            if(left[l] < right[r]) {
-                arr[i++] = left[l++]; // post increment ( after variable is used)
+        // merge both halves while both have elements left
+        while (i <= mid && j <= right) {
+            if (aux[i] <= aux[j]) {
+                arr[k++] = aux[i++]; // copy from left half if smaller
             } else {
-                arr[i++] = right[r++];
+                arr[k++] = aux[j++]; // post increment ( after variable is used)
             }
-            addSteptoFullArray(arr, startIndex);
+            steps.add(Arrays.copyOf(arr, arr.length));
         }
-        while(l < leftSize) {
-            arr[i++] = left[l++];
-            addSteptoFullArray(arr, startIndex);
+        // copy remaining elements
+        while (i <= mid) {
+            arr[k++] = aux[i++];
         }
-        while (r < rightSize) {
-            arr[i++] = right[r++];
-            addSteptoFullArray(arr, startIndex);
+        while (j <= right) {
+            arr[k++] = aux[j++];
+            steps.add(Arrays.copyOf(arr, arr.length));
         }
-    }
-
-    private void addSteptoFullArray(int[] arr, int startIndex) {
-        for (int i = 0; i < arr.length; i++) {
-            fullArr[startIndex + i] = arr[i];
-        }
-        steps.add(Arrays.copyOf(fullArr, fullArr.length));
+        // final step snapshot of this merge operation
+        steps.add(Arrays.copyOf(arr, arr.length));
     }
 }
+
