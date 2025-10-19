@@ -13,6 +13,7 @@ public class MainPanel extends JPanel {
 
     public MainPanel() {
         this.setLayout(new GridLayout(2, 2, 10, 10));
+        this.setBackground(Color.darkGray);
 
         randArr = new RandNumArray(1, 100);
         randArr.printArray();
