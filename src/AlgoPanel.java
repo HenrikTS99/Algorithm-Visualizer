@@ -58,6 +58,12 @@ public class AlgoPanel extends JPanel {
         }
     }
 
+    public void reset(int[] arr) {
+        algorithm.reset();
+        algorithm.prepare(arr);
+        updateCountLabels();
+    }
+
     private void updateCountLabels() {
         swapLabel.setText("Swaps: " + algorithm.getSwapCount());
         stepLabel.setText("Steps: " + algorithm.getStepCount());

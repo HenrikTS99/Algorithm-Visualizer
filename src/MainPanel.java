@@ -35,4 +35,11 @@ public class MainPanel extends JPanel {
         }
     }
 
+    public void resetAlgorithms() {
+        randArr = new RandNumArray(1, 100);
+        for (AlgoPanel panel : algoPanels) {
+            panel.reset(randArr.arr);
+        }
+    }
+
 }

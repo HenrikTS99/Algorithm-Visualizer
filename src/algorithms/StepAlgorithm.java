@@ -14,6 +14,12 @@ public abstract class StepAlgorithm implements SortingAlgorithm {
         return steps.poll();
     }
 
+    public void reset() {
+        steps.clear();
+        stepCount = 0;
+        swapCount = 0;
+    }
+
     protected void addStep(int[] arr, boolean swap) {
         steps.add(Arrays.copyOf(arr, arr.length));
         stepCount++;
