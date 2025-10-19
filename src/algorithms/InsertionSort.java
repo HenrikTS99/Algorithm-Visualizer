@@ -16,11 +16,15 @@ public class InsertionSort extends StepAlgorithm {
             while (j >= 0 && arr[j] > key) {
                 arr[j + 1] = arr[j];
                 j--;
-                steps.add(Arrays.copyOf(arr, arr.length));
+                addStep(arr, true);
             }
             arr[j + 1] = key;
-            steps.add(Arrays.copyOf(arr, arr.length));
+            addStep(arr, false);
 
         }
+    }
+    @Override
+    public String getAlgoName() {
+        return "Insertion Sort";
     }
 }

@@ -47,18 +47,24 @@ public class MergeSort extends StepAlgorithm {
             } else {
                 arr[k++] = aux[j++]; // post increment ( after variable is used)
             }
-            steps.add(Arrays.copyOf(arr, arr.length));
+            addStep(arr, false);
         }
         // copy remaining elements
         while (i <= mid) {
             arr[k++] = aux[i++];
+            addStep(arr, false);
         }
         while (j <= right) {
             arr[k++] = aux[j++];
-            steps.add(Arrays.copyOf(arr, arr.length));
+            addStep(arr, false);
         }
         // final step snapshot of this merge operation
-        steps.add(Arrays.copyOf(arr, arr.length));
+        addStep(arr, false);
+    }
+
+    @Override
+    public String getAlgoName() {
+        return "Merge Sort";
     }
 }
 

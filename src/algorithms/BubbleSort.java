@@ -17,10 +17,16 @@ public class BubbleSort extends StepAlgorithm {
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
                     swap = true;
+                    addStep(arr, true);
+                } else {
+                    addStep(arr, false);
                 }
-                steps.add(Arrays.copyOf(arr, arr.length));
             }
             if (!swap) { return; }
         }
+    }
+    @Override
+    public String getAlgoName() {
+        return "Bubble Sort";
     }
 }

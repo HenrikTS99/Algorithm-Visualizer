@@ -14,15 +14,20 @@ public class SelectionSort extends StepAlgorithm {
                 if ( arr[j] < arr[smallestIndex]) {
                     smallestIndex = j;
                 }
-                steps.add(Arrays.copyOf(arr, arr.length));
+                addStep(arr, false);
             }
-            if ( arr[smallestIndex] != i) {
+            if ( smallestIndex != i) {
                 int temp = arr[i];
                 arr[i] = arr[smallestIndex];
                 arr[smallestIndex] = temp;
-                steps.add(Arrays.copyOf(arr, arr.length));
+                addStep(arr, true);
             }
         }
-        steps.add(Arrays.copyOf(arr, arr.length));
+        addStep(arr, false);
+    }
+
+    @Override
+    public String getAlgoName() {
+        return "Selection Sort";
     }
 }

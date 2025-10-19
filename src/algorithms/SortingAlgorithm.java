@@ -3,5 +3,8 @@ package algorithms;
 public interface SortingAlgorithm {
     void prepare(int[] arr);
     int[] nextStep();
-   // boolean hasNext();
+    String getAlgoName();
+
+    int getStepCount();
+    int getSwapCount();
 }
