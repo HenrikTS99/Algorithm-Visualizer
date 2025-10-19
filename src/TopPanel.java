@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,18 +9,15 @@ public class TopPanel extends JPanel {
 
     public TopPanel(Visualizer visualizer) {
         this.visualizer = visualizer;
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+        this.setBackground(Color.darkGray);
         createResetButton();
         createDelaySlider(visualizer.getDelay());
     }
 
     private void createResetButton() {
         JButton resetButton = new JButton("Reset");
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                visualizer.resetAlgorithms();
-            }
-        });
+        resetButton.addActionListener(_ -> visualizer.resetAlgorithms());
         this.add(resetButton);
     }
 
@@ -40,9 +38,17 @@ public class TopPanel extends JPanel {
             visualizer.setDelay(logValue);
             delayLabel.setText("Delay: " + logValue + " ms");
         });
+
         // Add text labels and slider
-        this.add(new JLabel("Speed:"));
+        JLabel speedLabel = new JLabel("Speed:");
+        speedLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        speedLabel.setForeground(Color.WHITE);
+        this.add(speedLabel);
+
         this.add(delaySlider);
+
+        delayLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        delayLabel.setForeground(Color.WHITE);
         delayLabel.setText("Delay: " + currentDelay + " ms");
         this.add(delayLabel);
     }
